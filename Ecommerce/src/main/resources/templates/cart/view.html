@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head::head">
+    <title>SHOP</title>
+</head>
+
+<body ng-app="cart-app" ng-controller="cart-controller">
+<!-- Header Section Begin -->
+<header th:replace="layout/header::header"></header>
+<!-- Header Section End -->
+
+<!-- Hero Section Begin -->
+<section th:replace="layout/menu::menu"></section>
+<!-- Hero Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="../assets/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Shopping Cart</h2>
+                    <div class="breadcrumb__option">
+                        <a th:href="@{/home}">Home</a>
+                        <span>Shopping Cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Shoping Cart Section Begin -->
+<section class="shoping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="shoping__product">Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in cart.items">
+                                <td class="shoping__cart__item">
+                                    <img th:src="@{/assets/img/product/${item.image}}" alt="">
+                                    <h5>{{item.name}}</h5>
+                                </td>
+                                <td class="shoping__cart__price">
+                                    $ {{item.price | number : 2}}
+                                </td>
+                                <td class="shoping__cart__quantity">
+                                    <div class="quantity">
+                                        <div class="pro-qty">
+                                            <input ng-model="item.quantity" ng-change="cart.saveToLocalStorage()" value="1" type="number" min="1">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="shoping__cart__total">
+                                    {{item.quantity * item.price | number : 2}}
+                                </td>
+                                <td class="shoping__cart__item__close">
+                                    <span ng-click="cart.remove(item.id)" class="icon_close"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns">
+                    <a th:href="@{/product/list}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    <a class="primary-btn cart-btn cart-btn-right" ng-click="cart.clear()">
+                        <span class="icon_loading"></span>
+                        Clear</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__continue">
+                    <div class="shoping__discount">
+                        <h5>Discount Codes</h5>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your coupon code">
+                            <button type="submit" class="site-btn">APPLY COUPON</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__checkout">
+                    <h5>Cart Total</h5>
+                    <ul>
+                        <li>Subtotal <span>$ {{cart.amount | number : 2}}</span></li>
+                        <li>Total <span>$ {{cart.amount | number : 2}}</span></li>
+                    </ul>
+                    <a th:href="@{/order/checkout}" class="primary-btn">PROCEED TO CHECKOUT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shoping Cart Section End -->
+
+<!-- Footer Section Begin -->
+<footer th:replace="layout/footer::footer"></footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/assets/js/jquery-ui.min.js}"></script>
+<script th:src="@{/assets/js/jquery.slicknav.js}"></script>
+<script th:src="@{/assets/js/mixitup.min.js}"></script>
+<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script th:src="@{/assets/js/cart.js}"></script>
+
+
+</body>
+
+</html>
