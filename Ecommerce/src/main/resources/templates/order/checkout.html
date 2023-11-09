@@ -1,13 +1,101 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head::head">
+    <title>SHOP</title>
 </head>
-<body>
-    checkOut
+
+<body ng-app="cart-app" ng-controller="cart-controller">
+<!-- Header Section Begin -->
+<header th:replace="layout/header::header"></header>
+<!-- Header Section End -->
+
+<!-- Hero Section Begin -->
+<section th:replace="layout/menu::menu"></section>
+<!-- Hero Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="../assets/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Order</h2>
+                    <div class="breadcrumb__option">
+                        <a th:href="@{/home}">Home</a>
+                        <a th:href="@{/cart/view}">Cart</a>
+                        <span>Checkout</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+    <div class="container">
+        <div class="checkout__form">
+            <h4>Billing Details</h4>
+<!--            <form action="#">-->
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Purchaser<span>*</span></p>
+                                    <div class="form-control" id="username">[[${#authentication.name}]]</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Order Date<span>*</span></p>
+                                    <div class="form-control">{{order.createDate | date:'dd-MM-yyyy'}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout__input">
+                            <p>Country<span>*</span></p>
+                            <textarea ng-model="order.address" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h4>Your Order</h4>
+                            <div class="checkout__order__products">Products <span>Total</span></div>
+                            <ul ng-repeat="item in cart.items">
+                                <li>{{item.name}} <span>{{item.quantity * item.price | number : 2}}</span></li>
+                            </ul>
+                            <div class="checkout__order__subtotal">Subtotal <span>$ {{cart.amount | number : 2}}</span></div>
+                            <div class="checkout__order__total">Total <span>$ {{cart.amount | number : 2}}</span></div>
+                            <button class="site-btn" ng-click="order.purchase()">PLACE ORDER</button>
+                        </div>
+                    </div>
+                </div>
+<!--            </form>-->
+        </div>
+    </div>
+</section>
+<!-- Checkout Section End -->
+
+<!-- Footer Section Begin -->
+<footer th:replace="layout/footer::footer"></footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/assets/js/jquery-ui.min.js}"></script>
+<script th:src="@{/assets/js/jquery.slicknav.js}"></script>
+<script th:src="@{/assets/js/mixitup.min.js}"></script>
+<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script th:src="@{/assets/js/cart.js}"></script>
+
+
+
 </body>
+
 </html>

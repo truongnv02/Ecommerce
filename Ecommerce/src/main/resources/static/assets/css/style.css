@@ -403,6 +403,13 @@ ol {
 	color: #1c1c1c;
 }
 
+.header__top__right__auth button {
+	display: block;
+	font-size: 14px;
+	border: none;
+	background-color: transparent;
+}
+
 .header__top__right__auth a i {
 	margin-right: 6px;
 }

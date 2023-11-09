@@ -25,12 +25,16 @@ public class ProductController {
     public String getAllProduct(Model model,
                                 @RequestParam(defaultValue = "0", name = "page") Integer number,
                                 @RequestParam("category")Optional<String> categoryId) {
-        Pageable pageable = PageRequest.of(number, 12);
+        Pageable pageable = PageRequest.of(number, 4);
         if(categoryId.isPresent()) {
             Page<Product> listProduct = productService.findByCategoryId(categoryId.get(), pageable);
+            model.addAttribute("totalPages", listProduct.getTotalPages());
+            model.addAttribute("currentPage", number);
             model.addAttribute("listProduct", listProduct);
         }else {
             Page<Product> listProduct = productService.findAllProduct(pageable);
+            model.addAttribute("totalPages", listProduct.getTotalPages());
+            model.addAttribute("currentPage", number);
             model.addAttribute("listProduct", listProduct);
         }
         return "product/list";

@@ -329,7 +329,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                                    <h6><span>12</span> Products found</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -360,8 +360,17 @@
                         </div>
                     </div>
                     <div class="product__pagination">
-                        <a th:href="@{/product/list}">1</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item" th:each="i:${#numbers.sequence(1, totalPages)}"
+                                    th:classappend="${currentPage == i ? 'active' : ''}">
+                                    <a th:href="@{'?page=' + ${i - 1}}" th:text="${i}"></a>
+                                </li>
+                                <li class="page-item" th:if="${currentPage < 3}">
+                                    <a th:href="@{'?page=' + ${currentPage + 1}}"><i class="fa fa-long-arrow-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

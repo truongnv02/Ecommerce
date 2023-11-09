@@ -1,8 +1,11 @@
 package com.poly.truongnvph29176.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -37,4 +42,7 @@ public class Account implements Serializable {
 
     @Column(name = "Photo")
     private String photo;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Authority> authorities;
 }

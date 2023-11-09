@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,5 +34,5 @@ public class Role implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "role",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Authority> authoritys;
+    private Set<Authority> authorities;
 }

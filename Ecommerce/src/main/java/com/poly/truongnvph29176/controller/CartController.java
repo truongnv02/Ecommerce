@@ -12,7 +12,6 @@ public class CartController {
 
     @GetMapping("/view")
     public String viewCart() {
-
         return "cart/view";
     }
 }
